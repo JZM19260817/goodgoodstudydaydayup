@@ -1,0 +1,237 @@
+Java基础
+1.方法重载和重写
+重载是在同一个类中为一种行为提供多种实现并提高可读性
+重写是父类方法无法完成子类的需求，子类通过重写满足需求
+
+2.JVM、JRE、JDK
+JVM Java虚拟机，所有Java程序都运行在JVM上
+JRE JAVA运行环境，包含JVM，核心类库
+JDK Java开发包
+
+3.Collection集合
+  Collection（有序不唯一）
+    ArrayList：数组，查询快修改慢，线程不安全
+    Vector：数组，查询快修改满，线程安全
+    LinkedList：链表，查询慢修改快，不安全
+
+  Set（无序唯一）
+    HashSet：哈希表
+    LinkedHashSet
+    TreeSet
+
+4.注释
+//，/**/，/** */
+
+5.Java执行过程
+首先把.java转化为.class字节码，当需要运行的时候JVM把字节码转化成相应的机器码
+
+6.Final，Finally，Finalize
+final用于声明类，方法和属性，表示不能再被继承或者修改
+finally是异常处理的一部分
+finalize是Object垃圾回收时的方法
+
+7.Java数据类型
+byte、short、int、long、boolean、float、double
+char
+
+8.i++，++i，|，||
+
+9.抽象类接口类
+抽象类使用abstract关键字，里面可以有变量及实现方法，不能直接被new，需要被继承才能引用，一个类只能继承一个抽象方法，抽象类可以继承抽象类，如果一个类里面有抽象党法那么这个类一定是抽象类
+接口类是单独的一个.java，用interface修饰，里面不能有变量，只能有方法的定义，并且关键字只能是public static final，一个类可以继承多个接口
+
+10.Java参数类型转换
+由下往上
+
+11.switch-case，continue，break，do-while，while
+
+12.collection，collections
+collection是集合类的上级接口，List，map
+collections是针对集合类的一个帮助类
+
+13.break，continue
+
+14.方法重载
+重载是一个类里面有多个同名的方法，但是每个方法的实现并不一样
+
+15.递归
+
+16.数组，链表
+数组线性结构，查询效率高
+
+17.类与对象
+
+18.this，super
+this：在类中通过this访问自身的变量和方法
+super：对父类对象的引用
+
+19.static
+静态内部类不能访问非静态的成员、变量和方法
+
+20.public、protected、default、private
+public：跨类跨包
+protected：当前类、子类，可以跨包
+default：当前类、子类，不能跨包
+private：当前类
+
+21.list的遍历方法
+Iterator<Student> it=StudentList.iterator();
+while(it.hasNext()){
+  System.out.println(it.next().getName());
+};
+
+for(int i=0;i<StudentList.size();i++){
+};
+
+for(Sudent s:StudentList){
+};
+
+22.java.lang.Object
+0)publicObject():默认调用
+1)equals:判断两个对象是否指向同一个区域
+2)toString：返回对象的字符串
+3)Finalize()
+4)Wait()
+5)notifyAll()
+6)notify()
+
+23.继承条件下子类方法的执行过程
+  1.调用基类的构造方法
+  2.使用super调用
+  3.默认无参数调用
+  4.子类如果没有显示调用基类构造方法，基类又没有无参数构造方法则CE
+
+24.==,equals()
+
+25.多态
+子类对象继承父类引用，并重写父类方法
+
+26.final，abstract
+
+27.Java垃圾回收，自动装箱自动拆箱
+自动装箱拆箱：
+Integer a=1;
+int b=a;
+
+28.error,exception,checked,runtime
+error是程序无法解决的系统级错误
+exception是需要捕获或程序要处理的异常
+checked异常必须处理
+runtime运行时异常
+
+29.try,catch,finally,throw,throws
+public static getStudent(Student student) throws IOException{
+    try{
+        //do something
+    }catch(IOException){
+        throw e;
+    }finally{
+        //do something
+    }
+}
+
+30.throw,throws
+
+31.String,StringBuffer,StringBuilder
+String类，不可变，除了hash其他方法都是final,拼接时会产生新对象
+StringBuffer可变，线程安全
+StringBuilder线程不安全
+
+32.String s="abc",String s=new String("abc")
+后者是先创建一个值为abc的String再把值传递到s
+
+33.java.sql.date,java.util.date
+
+34.集合和数组
+数组需要声明容纳的类型，大小固定，有序，可重复
+
+35.List、Set、Collection、Map
+
+36.ArrayList，LinkedList
+前者数组实现，后者链表实现
+前者查询快，后者增删快
+
+37.HashSet
+
+38.Vector和ArrayList
+Vector线程安全，可设置增长因子
+
+39.HashMap，HashTable
+
+40.HashMap，LinkedHashMap，TreeMap
+
+41.输入流输出流，字符流字节流
+输入流：文件到程序，InputStream
+输出流：OutputStream
+字节流：输入流输出流是以字节流形式进行输入输出
+字符流：Reader，Writer，按字符进行读写
+节点流：直接从数据源读写数据
+处理流：不直接连接数据源，是其他流的封装
+
+42.常用字节输入输出流
+FileInputStream
+PipedInputStream
+FilterInputStream
+ByteArrayInputStream
+StringBufferInputStream
+
+43.缓冲流
+好处：高效读写信息
+将数据先缓冲起来，然后一起读写。装饰着模式
+
+44.线程进程
+线程是任务执行的基本单位
+进程是资源分配的基本单位
+
+45.如何创建线程
+继承Thread类并执行start()
+
+46.sleep和wait
+共同点：在多线程环境下阻塞程序调用一段时间，可以interrupt打断暂停
+不同点：sleep属于Thread的方法，wait属于Object的方法
+sleep保持上锁，wait解锁
+
+47.线程通信
+
+48.TCP，UDP
+
+49.日期转日期字符串
+
+50.单一实例
+
+强引用：只要存在就不会被垃圾回收
+软引用：作用于缓存，资源不足时回收
+弱引用：作用于缓存，下一次垃圾回收时回收
+虚引用：与是否回收无关
+
+单一实例模式：一个类只有一个实例，并提供全局访问点，适用于频繁创建销毁的场景
+1.懒汉式，线程不安全
+懒加载，线程不安全
+public class Test1{
+    private static Test1 test1;
+    private Test1(){};
+
+    public static Test1 getTest1(){
+        if(test==null)
+            new Test1();
+        return test;
+    }
+}
+2.懒汉式，线程安全
+public class Test2(){
+    private static Test2 test2;
+    private Test2(){};
+
+    public static syncronized Test2 getTest2(){
+        if(test2==null)new Test2();
+        return test2;
+    }
+}
+3.饿汉式，线程安全，容易产生垃圾对象
+public class Test3(){
+    private static Test3 test3=new Test3();
+    private Test3(){};
+    public static Test3 getTest3(){
+        return test3;
+    }
+}

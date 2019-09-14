@@ -1,0 +1,37 @@
+1.安卓四大组件
+    Activity：用户操作的可视化界面，setContentView()完成显示，在AndroidManifest中注册（不注册无法运行）
+    Service：一般没有UI界面，作用在后台，不运行在独立进程
+    ContentProvider内容提供器
+    BroadcastReceiver广播接收器
+
+2.广播类型：普通广播、有序广播
+  普通广播是异步执行，发送之后所有接收器会收到
+  有序广播是同步执行，发送之后会按照一定顺序进行传递，一次只有一个接收器收到广播
+
+  广播的生命周期很短，一般只有10秒，如果在这段事件没有执行完操作会报ANR
+
+3.Intent：显示和隐式
+显示：Intent intent=new Intent(this,SecondActivity.class);
+      startActivity(intent);
+使用键值对传递数据
+
+4.Activity的各种状态：onStart(),onResume(),onPause(),onStop(),onRestart(),onDestroy;
+  Activity的启动过程：发起请求启动另一个Activity->通知当前应用暂停当前Activity->当前应用暂停Activity并返回结果->通知启动新的Activity
+
+5.Activity的四种启动模式：Activity栈
+    标准模式：创建时进栈，返回时出栈
+    栈顶复用：创建时进栈，当新的Activity和栈顶Activity一样则不创建直接复用
+    栈内复用：创建时进栈，当新的 Activity能在栈内被找到则弹出它上面的Activity并让这个Activity暴漏在栈顶
+    全局唯一：创建时创建一个新的Activity栈并压入，当有重复activity时则唤醒
+onSaveInstanceState默认保持Activity的状态
+
+6.Fragment
+不能单独存在，需要和Activity绑定
+Fragment的滑动需要和viewPager绑定
+
+7.Activity和Service
+绑定操作：定义一个内部类继承Binder，实例化onBind()，在activity中完成绑定
+Activity启动service：Start：onCreate()->onStartCommand()->onDestory()
+                     Bind:onCreate()->onBind()->onUnbind()->onDestory()
+
+8.
