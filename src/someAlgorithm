@@ -23,3 +23,92 @@ public class sort{
         }
     }
 }
+
+dp之背包问题
+c[]物品重量 w[]价值 背包容积V
+设dp[i][j]=总价值，则i为取第i个，j为剩余容量
+for(int i=0;i<n;i++)
+{
+    for(int j=V;j>=0;j--)
+    {
+         if(j-c[i]>=0)
+            dp[i][j]=max(dp[i-1][j-c[i]]+w[i],dp[i-1][j]);
+         else
+            dp[i][j]=dp[i-1][j];
+    }
+}
+cout<<dp[n][V];
+
+dp之最长公共子序列（以数组为例）
+两个数组A，B
+dp[i][j]是A[i]和B[j]结尾的长度
+if A[i]==B[j] dp[i][j]=dp[i-1][j-1]+1;
+if A[i]!=B[j] dp[i][j]=0;
+int res=0;
+int dp[][]=new int[A.length][B.length];
+for(int i=1;i<dp.length;i++)
+{
+    for(int j=1;j<dp[i].length;j++)
+    {
+        dp[i][j]=((A[i-1]==B[j-1])?(dp[i-1][j-1]+1):0);
+        res=Math.max(res,dp[i][j]);
+    }
+}
+return res;
+
+dp之最长回文子串
+string s;
+len=s.length();
+bool dp[len-1][len-1]   dp[l][r]表示从第l个到r个子串是不是回文
+dp[i][i]=true
+判断式dp[l][r]=(s[l]==s[r]&&(r-l==1)||dp[l+1][r-1])?true:false
+string getStr(string s)
+{
+    int len=s.length();
+    if(len==0)return s;
+    bool dp[len][len];
+    for(int i=0;i<len;i++)
+        dp[i][j]=true;
+
+    for(int r=1;r<len;r++)
+    {
+        for(int l=0;l<r;l++)
+        {
+            if(s[l]==s[r]&&(r-l==1||dp[l+1][r-1]))
+            {
+                dp[l][r]=true;
+                if(r-l>end-start)
+                {
+                    start=l;
+                    end=r;
+                }
+                continue;
+            }
+            else
+            {
+                dp[l][r]=false;
+            }
+        }
+    }
+    return s.substr(start,end-start+1);
+}
+
+dp之最长上升子序列
+不bb上代码
+int lengthOfLIS(int* nums, int numsSize){
+    int dp[999999];
+    dp[0]=1;
+    int ans=0;
+    for(int i=0;i<numsSize;i++)
+    {
+        int maxVal=0;
+        for(int j=0;j<i;j++)
+        {
+            if(nums[i]>nums[j])
+                maxVal=maxVal>dp[j]?maxVal:dp[j];
+        }
+        dp[i]=maxVal+1;
+        ans=dp[i]>ans?dp[i]:ans;
+    }
+    return ans;
+}
