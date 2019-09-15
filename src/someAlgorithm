@@ -1,0 +1,25 @@
+快排
+public class sort{
+    public static void qSort(int[] arr,int start,int end){
+        int left=start,right=end;
+        int flag=arr[start];
+        while(left<right){
+            while(left<right&&arr[right]>flag)right--;
+            if(arr[right]<flag){
+                int tmp=arr[right];
+                arr[right]=arr[left];
+                arr[left]=tmp;
+            }
+
+            while(left<right&&arr[left]<flag)left++;
+            if(arr[left]>flag){
+                int tmp=arr[left];
+                arr[left]=arr[right];
+                arr[right]=tmp;
+            }
+
+            if(start<left)qSort(arr,start,left-1);
+            if(right<end)qSort(arr,right+1,end);
+        }
+    }
+}
