@@ -62,6 +62,7 @@ Activity构造时会初始化一个Window，Window里面有一个ViewRoot，View
 14.View的绘制流程
 自定义控件：组合控件、继承原有控件、自定义控件
 绘制流程：onMeasure()->onLayout()->onDraw()
+如何优化：减少不必要的代码、不在onDraw中分配内存、少用onDraw（onDraw会触发invalidate导致整个View刷新）、减少layout层数、使用扁平化view、复杂UI用ViewGroup
 
 15.View的分发机制
 Touch事件分发中只有两个主角:ViewGroup和View。ViewGroup包含onInterceptTouchEvent、dispatchTouchEvent、onTouchEvent三个相关事件。View包含dispatchTouchEvent、onTouchEvent两个相关事件。其中ViewGroup又继承于View
@@ -110,4 +111,14 @@ OOM...................
    如果需要频繁的刷新数据，需要添加动画，则RecyclerView有较大的优势。
    如果只是作为列表展示，则两者区别并不是很大。
 
-22.
+22.surfaceView
+适用于频繁刷新的页面，会开启一个子线程进行刷新，底层实现双缓冲机制
+
+23.序列化问题
+Serilizable和Parcelable，前者在序列化的过程中容易触发垃圾回收导致性能下降
+
+24.存储
+SharedPreferences、文件、SQLite、内容提供其、网络
+
+25.为什么不能再子线程更新UI
+更新UI时会执行checkThread()，这个函数判断当前线程是不是子线程，如果是就会抛出错误
