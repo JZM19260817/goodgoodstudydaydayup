@@ -66,6 +66,7 @@ string getStr(string s)
 {
     int len=s.length();
     if(len==0)return s;
+    intleft=0,right=0;
     bool dp[len][len];
     for(int i=0;i<len;i++)
         dp[i][j]=true;
@@ -74,7 +75,7 @@ string getStr(string s)
     {
         for(int l=0;l<r;l++)
         {
-            if(s[l]==s[r]&&(r-l==1||dp[l+1][r-1]))
+            if(s[l]==s[r]&&(r-l<=1||dp[l+1][r-1]))
             {
                 dp[l][r]=true;
                 if(r-l>end-start)
@@ -125,3 +126,28 @@ int binarySearch(int *arr,int key){
     }
     return -1;
 }
+
+链表翻转
+struct Node
+{
+    int val;
+    struct Node *next;
+};
+Node reverseList(Node *pHead)
+{
+    Node *pNode=pHead;//当前节点
+    Node *pPrev=nullptr;//当前节点的上一个
+    Node *pNext=nullptr;//当前节点的下一个
+    Node *pReverse=nullptr;//新链表的头节点
+
+    while(pNode!=nullptr)
+    {
+        pNext=pNode->next;
+        if(pNext==NULL)pReverse=pNode;
+        pNode->next=pPrev;
+        pPrev=pNode;
+        pNode=pNext;
+    }
+    return pReverse;
+}
+
