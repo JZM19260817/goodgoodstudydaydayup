@@ -151,3 +151,45 @@ Node reverseList(Node *pHead)
     return pReverse;
 }
 
+二叉树深度
+int TreeDepth(TreeNode* pRoot)
+    {
+        if(pRoot==NULL)return 0;
+        else
+        {
+            int left=TreeDepth(pRoot->left);
+            int right=TreeDepth(pRoot->right);
+            return max(left,right)+1;
+        }
+    }
+
+丑数
+    int GetUglyNumber_Solution(int index) {
+        int* ugly=new int[index];
+        int p2=0,p3=0,p5=0;
+        ugly[0]=1;
+        for(int i=1;i<index;i++)
+        {
+            ugly[i]=min(ugly[p2]*2,min(ugly[p3]*3,ugly[p5]*5));
+            if(ugly[i]==ugly[p2]*2)p2++;
+            if(ugly[i]==ugly[p3]*3)p3++;
+            if(ugly[i]==ugly[p5]*5)p5++;
+        }
+        return ugly[index-1];
+        delete[] ugly;
+    }
+
+栈的压入弹出序列
+    bool IsPopOrder(vector<int> pushV,vector<int> popV) {
+        if(pushV.empty())return false;
+        vector<int>vect;
+        for(int i=0,j=0;i<pushV.size();){
+            vect.push_back(pushV[i++]);
+            while(j<popV.size()&&vect.back()==popV[j]){
+                vect.pop_back();
+                j++;
+            }
+        }
+        return vect.empty();
+    }
+
