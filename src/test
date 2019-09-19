@@ -135,6 +135,7 @@ public static getStudent(Student student) throws IOException{
 31.String,StringBuffer,StringBuilder
 String类，不可变，除了hash其他方法都是final,拼接时会产生新对象
 StringBuffer可变，线程安全
+append(String s)拼接 reverse反转 delete(int i,int j)删除从i到j
 StringBuilder线程不安全
 
 32.String s="abc",String s=new String("abc")
@@ -192,6 +193,16 @@ StringBufferInputStream
 sleep保持上锁，wait解锁
 
 47.线程通信
+线程间通讯：PipeStream、共享变量
+···进程间通讯：Pipe、命名管道、信号、消息队列、共享内存、内存映射、信号量、socket
+常见线程通讯方式
+    1.syncrhoized加锁的线程的object类的wait、notify、notifyAll
+      wait、notify、notifyAll是本地final方法
+      调用wait让线程阻塞并且当前线程必须拥有此对象的锁
+      调用notify唤醒一个正在等待这个对象的锁的进程
+      调用notifyAll唤醒所有正在等待这个对象的锁的进程
+    2.reentrantLock类加锁的线程的Condition类的await、signal、signalAll
+
 
 48.TCP，UDP
 
@@ -235,3 +246,4 @@ public class Test3(){
         return test3;
     }
 }
+双重锁、登记式、枚举
